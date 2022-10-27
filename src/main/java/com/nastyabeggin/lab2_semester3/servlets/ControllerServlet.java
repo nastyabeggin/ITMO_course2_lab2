@@ -7,49 +7,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.util.Objects;
 
 @WebServlet(name = "controller-servlet", value = "/controller-servlet")
 public class ControllerServlet extends HttpServlet {
-
-    @Override
-    public void init() {
-
-    }
-
-    @Override
-    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        processRequest(request, response);
-    }
-
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        processRequest(request, response);
+        request.getRequestDispatcher("/area-check-servlet").forward(request, response);
+
     }
 
     @Override
-    public void doPut(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        processRequest(request, response);
-    }
-
-    private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if (request.getMethod().equals("GET")) {
-            //UUID senderUUID = UUID.randomUUID();
-            //request.getServletContext().setAttribute("sender-id", senderUUID);
-            //request.setAttribute("controller-id", senderUUID);
-//            PrintWriter pw = response.getWriter();
-//            pw.write("{}");
-//            pw.flush();
-            request.getRequestDispatcher("/area-check-servlet").forward(request, response);
-        } else if (request.getMethod().equals("POST") || request.getMethod().equals("PUT")) {
-            request.getRequestDispatcher("/context-servlet").forward(request, response);
-        }
-
-    }
-
-    private boolean parametersAreExists(HttpServletRequest request) {
-        return request.getParameter("x-value") != null
-                && request.getParameter("y-value") != null
-                && request.getParameter("r-value") != null
-                && request.getParameter("timezone") != null;
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        request.getRequestDispatcher("/cleaner").forward(request, response);
     }
 }

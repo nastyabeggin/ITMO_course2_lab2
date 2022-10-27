@@ -175,6 +175,7 @@ input[type=submit]:enabled {
 #graph {
     color: #1d1d1d;
     transform: scale(1.2);
+    cursor: pointer;
 }
 
 #table {

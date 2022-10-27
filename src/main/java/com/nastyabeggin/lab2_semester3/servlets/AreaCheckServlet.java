@@ -5,7 +5,6 @@ import com.nastyabeggin.lab2_semester3.model.Shot;
 import com.nastyabeggin.lab2_semester3.model.ShotCollectionManager;
 import org.codehaus.jackson.map.ObjectMapper;
 
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;

@@ -43,7 +43,7 @@ public class Shot {
         this.r = r;
     }
 
-    public boolean isStatus() {
+    public boolean getStatus() {
         return status;
     }
 
