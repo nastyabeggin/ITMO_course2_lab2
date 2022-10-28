@@ -4,6 +4,7 @@ function clearTable() {
         url: "controller-servlet",
         async: false,
         success: function () {
+            window.location.reload();
         },
         error: function (xhr, textStatus, err) {
             alert("readyState: " + xhr.readyState + "\n" +
@@ -13,12 +14,4 @@ function clearTable() {
                 "error: " + err);
         }
     })
-    $('#table').html(`<tr>
-            <th>X</th>
-            <th>Y</th>
-            <th>R</th>
-            <th>Текущее время</th>
-            <th>Время работы скрипта (мс)</th>
-            <th>Результат</th>
-            </tr>`);
 }

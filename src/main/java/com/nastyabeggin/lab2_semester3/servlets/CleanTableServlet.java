@@ -14,6 +14,6 @@ public class CleanTableServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ShotCollectionManager.clear();
-        getServletContext().setAttribute("collection", ShotCollectionManager.getCollection());
+        getServletContext().setAttribute("shots", ShotCollectionManager.getCollection());
     }
 }

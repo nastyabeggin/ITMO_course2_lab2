@@ -4,6 +4,7 @@ package com.nastyabeggin.lab2_semester3.servlets;
 import com.nastyabeggin.lab2_semester3.model.Shot;
 import com.nastyabeggin.lab2_semester3.model.ShotCollectionManager;
 import org.codehaus.jackson.map.ObjectMapper;
+import sun.tools.jconsole.JConsole;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -27,18 +28,22 @@ public class AreaCheckServlet extends HttpServlet {
             float x = Float.parseFloat(request.getParameter("x-value"));
             float y = Float.parseFloat(request.getParameter("y-value"));
             float r = Float.parseFloat(request.getParameter("r-value"));
-            System.out.println(x);
-            if (!validateVariables(x, y, r)) {
+            log("X: " + x);
+            log("Y: " + y);
+            log("R: " + r);
+            boolean status = isHit(x, y, r);
+
+            if (!validateVariables(x, y, r) && !status) {
+                log("variables arent valid(");
                 response.setStatus(400);
                 return;
             }
 
-            Boolean status = isHit(x, y, r);
-
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
             Shot newShot = new Shot(x, y, r, startTime.minusMinutes(Long.parseLong(request.getParameter("timezone"))).format(formatter),
-                    Math.round(LocalDateTime.now().minusNanos(startTime.getNano()).getNano() * 0.000001), status);
+                    (long) (LocalDateTime.now().minusNanos(startTime.getNano()).getNano() * 0.000001), status);
             ShotCollectionManager.add(newShot);
+            log("Shot successfully added");
 
             getServletContext().setAttribute("shots", ShotCollectionManager.getCollection());
             String responseBody = om.writeValueAsString(newShot);

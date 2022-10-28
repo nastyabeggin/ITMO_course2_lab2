@@ -33,9 +33,7 @@ function sendDataToServer(x, y, r) {
                 "timezone": new Date().getTimezoneOffset()
             },
             success: function () {
-               // makeDot();
-               // moveDot(r);
-                window.location.reload(true);
+                window.location.replace('./result.jsp');;
             },
             error: function (xhr, textStatus, err) {
                 alert("readyState: " + xhr.readyState + "\n" +
@@ -46,13 +44,4 @@ function sendDataToServer(x, y, r) {
             }
         });
     }
-
 }
-
-
-// function updateTable(data) {
-//     let tableRow = "<tr><th>" + data["x"] + "</th><th>" + data["y"]
-//         + "</th><th>" + data["r"] + "</th><th>" + data["time"] + "</th><th>" + +data["scriptTime"]
-//         + "</th><th>" + data["status"] + "</th></tr>";
-//     $('#table tr:last').after(tableRow);
-// }

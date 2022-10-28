@@ -38,7 +38,7 @@
 
     <div id="content">
         <div id="graph">
-            <svg width="300px" height="300px" onclick="svgHandler(event)">
+            <svg width="300px" height="300px" onclick="svgHandler(event)" class="svgClass">
                 <!-- Координатные оси -->
                 <line x1="0" x2="300" y1="150" y2="150" stroke="#343548"></line>
                 <line x1="150" x2="150" y1="0" y2="300" stroke="#343548"></line>
@@ -80,8 +80,8 @@
                 <text x="162" y="254">-R</text>
                 <%--@elvariable id="shots" type="java.util.LinkedList"--%>
                 <c:forEach items="${shots}" var="col">
-                    <circle class="shot" cx="${150 + 50 * col.getR()/2 * col.getX()}"
-                            cy="${150 - 50 * col.getR()/2 * col.getY()}" r="2"
+                    <circle class="shot" cx="${150 + 50 * 2/col.getR() * col.getX()}"
+                            cy="${150 - 50 * 2/col.getR() * col.getY()}" r="2"
                             fill="orangered" stroke-width="0"></circle>
                 </c:forEach>
             </svg>
@@ -121,7 +121,11 @@
                         <label for="s5">5</label>
                         <br>
                     </div>
-                    <input type="submit" class="element" name="submit-btn" value="Подтвердить"></div>
+                    <div id="formButtons">
+                    <input type="submit" class="element" name="submit-btn" value="Подтвердить">
+                  <button onClick="window.location.replace('./result.jsp');" type="reset" onclick="">Последний результат</button>
+                    </div>
+                </div>
         </form>
         <section id="validationInfo" class="validationInfo">
         </section>
@@ -136,20 +140,20 @@
             <th>X</th>
             <th>Y</th>
             <th>R</th>
-            <th>Текущее время</th>
+            <th>Время запроса</th>
             <th>Время работы скрипта (мс)</th>
             <th>Результат</th>
         </tr>
         <%--@elvariable id="shots" type="java.util.LinkedList"--%>
         <c:forEach items="${shots}" var="col">
-        <tr>
-            <td>${col.getX().toString().format("%.2f", col.getX()).replaceAll(",",".")}</td>
-            <td>${col.getY().toString().format("%.2f", col.getY()).replaceAll(",",".")}</td>
-            <td>${col.getR().toString().format("%.2f", col.getR()).replaceAll(",",".")}</td>
-            <td>${col.getTime().toString()}</td>
-            <td>${col.getScriptTime().toString()}</td>
-            <td>${col.getStatus().toString()}</td>
-        </tr>
+            <tr>
+                <td>${col.getX().toString().format("%.2f", col.getX()).replaceAll(",",".")}</td>
+                <td>${col.getY().toString().format("%.2f", col.getY()).replaceAll(",",".")}</td>
+                <td>${col.getR().toString().trim().format("%.2f", col.getR()).replaceAll(",",".")}</td>
+                <td>${col.getTime().toString()}</td>
+                <td>${col.getScriptTime().toString()}</td>
+                <td>${col.getStatus().toString()}</td>
+            </tr>
         </c:forEach>
     </table>
 </div>

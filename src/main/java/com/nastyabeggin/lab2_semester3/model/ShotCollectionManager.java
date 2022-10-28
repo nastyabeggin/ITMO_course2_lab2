@@ -17,4 +17,6 @@ public class ShotCollectionManager {
         return collection;
     }
 
+    public static int size() { return collection.size();
+    }
 }
